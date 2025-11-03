@@ -1,34 +1,74 @@
 import { useState } from 'react'
-import viteLogo from '/vite.svg'
-import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [num1, setNum1] = useState<string>('')
+  const [num2, setNum2] = useState<string>('')
+  const [operation, setOperation] = useState<string>('addition')
+  const [result, setResult] = useState<string>('')
+
+  const handleCalculate = () => {
+    // La logique de calcul sera ajoutée dans l'étape suivante
+    setResult('Calcul à implémenter')
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)} type="button">
-          count is {count}
+    <div className="calculator-container">
+      <h1>Calculatrice</h1>
+
+      <div className="calculator">
+        <div className="input-group">
+          <label htmlFor="num1">Nombre 1:</label>
+          <input
+            id="num1"
+            type="number"
+            value={num1}
+            onChange={(e) => setNum1(e.target.value)}
+            placeholder="Entrez le premier nombre"
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="operation">Opération:</label>
+          <select
+            id="operation"
+            value={operation}
+            onChange={(e) => setOperation(e.target.value)}
+          >
+            <option value="addition">Addition (+)</option>
+            <option value="soustraction">Soustraction (-)</option>
+            <option value="multiplication">Multiplication (×)</option>
+            <option value="division">Division (÷)</option>
+          </select>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="num2">Nombre 2:</label>
+          <input
+            id="num2"
+            type="number"
+            value={num2}
+            onChange={(e) => setNum2(e.target.value)}
+            placeholder="Entrez le deuxième nombre"
+          />
+        </div>
+
+        <button
+          type="button"
+          className="calculate-btn"
+          onClick={handleCalculate}
+        >
+          Calculer
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+        <div className="result-group">
+          <label>Résultat:</label>
+          <div className="result-display">
+            {result || 'Aucun calcul effectué'}
+          </div>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 

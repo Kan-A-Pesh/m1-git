@@ -2,22 +2,41 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import App from '../src/App'
 
-describe('App', () => {
-  it('renders Vite + React heading', () => {
+describe('App - Structure UI de la calculatrice', () => {
+  it('affiche les deux champs de saisie pour les nombres', () => {
     render(<App />)
-    const heading = screen.getByRole('heading', { name: /vite \+ react/i })
-    expect(heading).toBeInTheDocument()
+
+    const input1 = screen.getByLabelText(/nombre 1/i)
+    const input2 = screen.getByLabelText(/nombre 2/i)
+
+    expect(input1).toBeInTheDocument()
+    expect(input2).toBeInTheDocument()
   })
 
-  it('renders count button', () => {
+  it('affiche le menu déroulant pour sélectionner l\'opération', () => {
     render(<App />)
-    const button = screen.getByRole('button', { name: /count is/i })
-    expect(button).toBeInTheDocument()
+
+    const operationSelect = screen.getByLabelText(/opération/i)
+
+    expect(operationSelect).toBeInTheDocument()
+    expect(operationSelect.tagName).toBe('SELECT')
   })
 
-  it('displays initial count of 0', () => {
+  it('affiche le bouton "Calculer"', () => {
     render(<App />)
-    const button = screen.getByRole('button', { name: /count is 0/i })
-    expect(button).toBeInTheDocument()
+
+    const calculateButton = screen.getByRole('button', { name: /calculer/i })
+
+    expect(calculateButton).toBeInTheDocument()
+  })
+
+  it('affiche la zone de résultat', () => {
+    render(<App />)
+
+    const resultLabel = screen.getByText(/résultat/i)
+    const resultDisplay = screen.getByText(/aucun calcul effectué/i)
+
+    expect(resultLabel).toBeInTheDocument()
+    expect(resultDisplay).toBeInTheDocument()
   })
 })
