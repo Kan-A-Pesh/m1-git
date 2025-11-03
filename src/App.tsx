@@ -8,8 +8,49 @@ function App() {
   const [result, setResult] = useState<string>('')
 
   const handleCalculate = () => {
-    // La logique de calcul sera ajoutée dans l'étape suivante
-    setResult('Calcul à implémenter')
+    // Convertir les strings en nombres
+    const number1 = Number(num1)
+    const number2 = Number(num2)
+
+    // Vérifier que les deux nombres sont valides
+    if (num1.trim() === '' || num2.trim() === '') {
+      setResult('Erreur : Veuillez entrer les deux nombres')
+      return
+    }
+
+    if (Number.isNaN(number1) || Number.isNaN(number2)) {
+      setResult('Erreur : Nombres invalides')
+      return
+    }
+
+    // Effectuer l'opération sélectionnée
+    let calculatedResult: number
+
+    switch (operation) {
+      case 'addition':
+        calculatedResult = number1 + number2
+        break
+      case 'soustraction':
+        calculatedResult = number1 - number2
+        break
+      case 'multiplication':
+        calculatedResult = number1 * number2
+        break
+      case 'division':
+        // Gérer la division par zéro
+        if (number2 === 0) {
+          setResult('Erreur : Division par zéro impossible')
+          return
+        }
+        calculatedResult = number1 / number2
+        break
+      default:
+        setResult('Erreur : Opération non reconnue')
+        return
+    }
+
+    // Afficher le résultat
+    setResult(calculatedResult.toString())
   }
 
   return (
