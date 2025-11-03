@@ -103,7 +103,7 @@ function App() {
         </button>
 
         <div className="result-group">
-          <label>Résultat:</label>
+          <p>Résultat:</p>
           <div className="result-display">
             {result || 'Aucun calcul effectué'}
           </div>
