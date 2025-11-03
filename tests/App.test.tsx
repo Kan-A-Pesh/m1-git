@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
 import userEvent from '@testing-library/user-event'
+import { describe, expect, it } from 'vitest'
 import App from '../src/App'
 
 describe('App - Structure UI de la calculatrice', () => {
@@ -14,7 +14,7 @@ describe('App - Structure UI de la calculatrice', () => {
     expect(input2).toBeInTheDocument()
   })
 
-  it('affiche le menu déroulant pour sélectionner l\'opération', () => {
+  it("affiche le menu déroulant pour sélectionner l'opération", () => {
     render(<App />)
 
     const operationSelect = screen.getByLabelText(/opération/i)
@@ -139,7 +139,7 @@ describe('App - Logique de calcul', () => {
     expect(result).toBeInTheDocument()
   })
 
-  it('affiche une erreur lors d\'une division par zéro', async () => {
+  it("affiche une erreur lors d'une division par zéro", async () => {
     const user = userEvent.setup()
     render(<App />)
 
@@ -159,7 +159,9 @@ describe('App - Logique de calcul', () => {
     await user.click(calculateButton)
 
     // Vérifier le message d'erreur
-    const errorMessage = screen.getByText(/erreur : division par zéro impossible/i)
+    const errorMessage = screen.getByText(
+      /erreur : division par zéro impossible/i,
+    )
     expect(errorMessage).toBeInTheDocument()
   })
 
@@ -180,7 +182,9 @@ describe('App - Logique de calcul', () => {
     await user.click(calculateButton)
 
     // Vérifier le message d'erreur
-    const errorMessage = screen.getByText(/erreur : veuillez entrer les deux nombres/i)
+    const errorMessage = screen.getByText(
+      /erreur : veuillez entrer les deux nombres/i,
+    )
     expect(errorMessage).toBeInTheDocument()
   })
 
@@ -201,7 +205,9 @@ describe('App - Logique de calcul', () => {
     await user.click(calculateButton)
 
     // Vérifier le message d'erreur
-    const errorMessage = screen.getByText(/erreur : veuillez entrer les deux nombres/i)
+    const errorMessage = screen.getByText(
+      /erreur : veuillez entrer les deux nombres/i,
+    )
     expect(errorMessage).toBeInTheDocument()
   })
 
@@ -221,7 +227,9 @@ describe('App - Logique de calcul', () => {
     await user.click(calculateButton)
 
     // Vérifier le message d'erreur
-    const errorMessage = screen.getByText(/erreur : veuillez entrer les deux nombres/i)
+    const errorMessage = screen.getByText(
+      /erreur : veuillez entrer les deux nombres/i,
+    )
     expect(errorMessage).toBeInTheDocument()
   })
 
@@ -246,7 +254,9 @@ describe('App - Logique de calcul', () => {
     // Note: Le type="number" dans l'input HTML empêche l'entrée de lettres
     // mais si des caractères invalides passent, l'erreur devrait s'afficher
     // Dans ce cas, l'input sera vide car le type="number" rejette "abc"
-    const errorMessage = screen.getByText(/erreur : veuillez entrer les deux nombres/i)
+    const errorMessage = screen.getByText(
+      /erreur : veuillez entrer les deux nombres/i,
+    )
     expect(errorMessage).toBeInTheDocument()
   })
 })
